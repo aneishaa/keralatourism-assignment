@@ -1,0 +1,26 @@
+body {
+    background-image: url('images/kerala-beauty.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+header{
+    height: 16vh;
+
+}
+#img1{
+    width: 100px;
+    height:100px;
+
+}
+.loginitem{
+
+    /* border:1px solid white; */
+    /* background:whitesmoke; */
+    
+    
+   
+
+}
+.login{
+     background-image: url('images/tvmbk.jpg');
+}
