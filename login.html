@@ -19,20 +19,21 @@
     <div class="container col-3 mt-5 pb-3 pt-5 vw-auto border border-primary bg-info">
 
 
-        <form>
+        <form method="post" action="districtdetail.html" onsubmit="return validate()">
 
             <fieldset class="form-group">
                 <div class="loginitem">
                     <legend>Login Info</legend>
                     <div class="form-group">
                         <label class="form-control-label " for="ownername">User name</label>
-                        <input class="form-control" type="text" id="ownername" placeholder="User Name">
+                        <input class="form-control" type="text" id="uname" placeholder="User Name">
+                        <label class="form-control-label" for="errordisplay" id="erroruname"></label>
                     </div><!-- form-group -->
 
                     <div class="form-group">
                         <label class="form-control-label" for="password">Password</label>
-                        <input class="form-control" type="password" id="password" placeholder="Password">
-
+                        <input class="form-control" type="password" id="password1" placeholder="Password">
+                        <label class="form-control-label" for="errordisplay" id="passworderror"></label>
                     </div><br><!-- form-group -->
                     <button class="btn btn-primary mx-xl-5 mx-lg-5 mx-md-3 pt-2" type="submit">Submit</button>
                     <a href="index.html">Back</a>
@@ -42,6 +43,72 @@
 
         </form>
     </div>
+    <script>
+        function validate() {
+
+
+            var pwd = passwordvalidate()
+
+            var uname = unamevalidate()
+            if (pwd == true & uname == true) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        function unamevalidate() {
+            var username = document.getElementById("uname")
+            //  alert("username.value")
+            if (username.value === "") {
+                //  alert("inside uname id not entered")
+                document.getElementById("erroruname").innerText = "Enter Username"
+                erroruname.style.color = "red"
+                return false;
+
+            }
+            else {
+
+                return true;
+            }
+        }
+
+
+        function passwordvalidate() {
+            var password = document.getElementById("password1")
+            if (password.value === "") {
+                //alert("inside password.value")
+                document.getElementById("passworderror").innerText = "Enter Password"
+                passworderror.style.color = "red"
+                return false;
+            }
+
+
+            var regexp1 = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
+
+            if (regexp1.test(password.value)) {
+
+
+
+                return true;
+
+
+            }
+            else {
+                //alert("inside else")
+                document.getElementById("passworderror").innerText = "Minimum 8 characters, at least one uppercase, and one lower case, must contain at least one number"
+                passworderror.style.color = "red"
+                return false;
+            }
+
+
+        }
+
+
+
+
+
+    </script>
 </body>
 
 </html>

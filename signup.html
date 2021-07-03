@@ -19,34 +19,45 @@
     <div class="container col-3 mt-5 pb-3 pt-5 vw-auto border border-primary bg-info">
 
 
-        <form>
+        <form  action="login.html" onsubmit="return validate()">
 
             <fieldset class="form-group">
                 <div class="loginitem">
                     <legend>Signup</legend>
                     <div class="form-group">
-                        <label class="form-control-label " for="ownername">User name</label>
-                        <input class="form-control" type="text" id="ownername" placeholder="User Name">
+                        <label class="form-control-label " for="ownername" >User name</label>
+                        <input class="form-control" type="text" id="uname" placeholder="User Name">
+                        <label class="form-control-label" for="errordisplay" id ="erroruname"></label>
                     </div><!-- form-group -->
                     <div class="form-group">
-                        <label class="form-control-label" for="owneremail">Email address</label>
-                        <input class="form-control" type="email" id="owneremail" aria-describedby="emailHelp" placeholder="Enter email">
-                        <small class="form-text text-muted" id="emailHelp">We'll never share your email</small>
+                        <label class="form-control-label" for="owneremail" >Email address</label>
+                        <input class="form-control" type="text" id="owneremail" aria-describedby="emailHelp" placeholder="Enter email">
+                        <label class="form-control-label" for="errordisplay" id ="error"></label>
+                        <!-- <small class="form-text text-muted" id="emailHelp">We'll never share your email</small> -->
                       </div>
-
+                      <div class="form-group">
+                        <label class="form-control-label" for="phonenumber">Phone Number</label>
+                        <input class="form-control" type="text" id="phonenumber"  placeholder="phone number">
+                        <label class="form-control-label" for="errordisplay" id ="errorphone"></label>
+                        <!-- <small class="form-text text-muted" id="phoneno">We'll never share your phone number</small> -->
+                      </div>
 
                     <div class="form-group">
                         <label class="form-control-label" for="password">Password</label>
-                        <input class="form-control" type="password" id="password" placeholder="Password">
-
+                        <input class="form-control" type="password" id="password1" placeholder="Password">
+                        <label class="form-control-label" for="errordisplay" id ="passworderror"></label>
+                        <label class="form-control-label" for="errordisplay" id ="passwordstrength"></label>
+                        <br>
+                        <button class="btn btn-info mx-xl-5 mx-lg-5 mx-md-3 pt-2 " type="button"onclick="passwordcheck()" >CheckStrength</button>
                     </div><!-- form-group -->
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label class="form-control-label" for="password">Repeat Password</label>
-                        <input class="form-control" type="password" id="password" placeholder="Repeat Password">
+                        <input class="form-control" type="password" id="password2" placeholder="Repeat Password">
 
-                    </div><!-- form-group -->
+                    </div> -->
+                    <!-- form-group -->
                      <br>
-                    <button class="btn btn-primary mx-xl-5 mx-lg-5 mx-md-3 pt-2 " type="submit">Submit</button>
+                    <button class="btn btn-primary mx-xl-5 mx-lg-5 mx-md-3 pt-2 " type="submit" >Submit</button>
                     <a href="index.html">Back</a>
                 </div>
 
@@ -54,6 +65,163 @@
 
         </form>
     </div>
+    <script>
+
+     function validate(){
+
+        var etest = emailvalidate()
+        var phno = phonevalidate()
+        var pwd = passwordvalidate()
+        // var pwdcheck = passwordcheck()
+        var uname = unamevalidate()
+       
+       
+     
+       
+        if (etest == true & phno == true & pwd == true & uname == true){
+            
+            return true;
+        }
+        else{
+            return false;
+        }
+        // if (phno == true){
+        //     return true;
+        // }
+        // else{
+        //     return false;
+        // }
+          
+     }
+
+     function passwordcheck(){
+        var password = document.getElementById("password1")
+        var weakRegex =  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/
+                if(weakRegex.test(password.value)){
+
+                  document.getElementById("passwordstrength").innerText="Weak"
+                  passwordstrength.style.color = "orange"
+
+                 }
+                var mediumRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{10,})/
+                if(mediumRegex.test(password.value)){
+
+                            document.getElementById("passwordstrength").innerText="Medium"
+                            passwordstrength.style.color = "orange"
+
+                  }
+                var strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@@#\$%\^&\*])(?=.{8,})/;
+                if(strongRegex.test(password.value)){
+
+                  document.getElementById("passwordstrength").innerText="Strong"
+                  passwordstrength.style.color = "green"
+                 
+                }
+        return true;
+     }
+     function unamevalidate(){
+         var username =  document.getElementById("uname")
+        //  alert("username.value")
+         if (username.value === ""){
+            //  alert("inside uname id not entered")
+            document.getElementById("erroruname").innerText="Enter Username"
+            erroruname.style.color = "red"
+            return false;
+
+         }
+         else {
+
+             return true;
+         }
+     }
+     function passwordvalidate(){
+         var password = document.getElementById("password1")
+         if(password.value === ""){
+                 // alert("inside password.value")
+                  document.getElementById("passworderror").innerText="Enter Password"
+                  passworderror.style.color = "red"
+                  return false;
+             }
+             
+            //   var regexp1 = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+                // alert("start")
+                 var regexp1 =   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/ ;
+                // alert(regexp1.test(password.value))
+             if(regexp1.test(password.value)){
+                // document.getElementById("passworderror").innerText="Valid Password"
+                // passworderror.style.color="green"
+                
+
+                 return true;
+
+
+            }
+             else{
+                 // alert("inside else")
+                  document.getElementById("passworderror").innerText="Minimum 8 characters, at least one uppercase, and one lower case, must contain at least one number"
+                  passworderror.style.color = "red"
+                  return false;
+              }
+
+
+     }
+     function phonevalidate(){
+        var phoneno = document.getElementById("phonenumber")
+        // alert(phoneno.value)
+        if(phoneno.value === ""){
+                //   alert("inside phone.value")
+                  document.getElementById("errorphone").innerText="Enter Phone number"
+                  errorphone.style.color = "red"
+                   return false;
+             }
+            
+             
+             let regexph = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+             if(regexph.test(phoneno.value)){
+                document.getElementById("errorphone").innerText="Valid Phone no"
+                error.style.color="green"
+                 return true;
+
+            }
+             else{
+                //   alert("inside else")
+                  document.getElementById("errorphone").innerText="Invalid Format"
+                  errorphone.style.color = "red"
+                   return false;
+              }
+
+
+     }
+     
+        
+         function emailvalidate(){
+            var email = document.getElementById("owneremail")
+            var  error = document.getElementById("error")
+             if(email.value === null){
+                  document.getElementById("error").innerText="Enter email id"
+                   error.style.color = "red"
+                   return false;
+             }
+             let regexp = /^([A-Za-z0-9\.-]+)@([A-Za-z0-9\-]+).([a-z]{2,3})(.[a-z]{2,3})?$/
+            //  var t = regexp.test(email.value)
+             
+
+            
+            if(regexp.test(email.value)){
+                // console.log("inside if regexp")
+                document.getElementById("error").innerText="Valid email"
+                error.style.color="green"
+                 return true;
+
+            }
+             else{
+                 // alert("inside else")
+                  document.getElementById("error").innerText="Invalid email"
+                   error.style.color = "red"
+                   return false;
+              }
+        }
+    </script>
 </body>
 
 </html>
